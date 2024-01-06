@@ -1,4 +1,4 @@
-package com.rnboilerplates;
+package com.lubbtech;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

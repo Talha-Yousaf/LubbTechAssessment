@@ -1,4 +1,4 @@
-package com.rnboilerplates;
+package com.lubbtech;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "440300609647",
+    "project_id": "lubb-tech-assessment",
+    "storage_bucket": "lubb-tech-assessment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440300609647:android:3dce5b14875638b7252d9a",
+        "android_client_info": {
+          "package_name": "com.lubbtech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoBDzmwVfe7EvaCYJq0Cl6Frf-jovFDEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
