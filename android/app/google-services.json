@@ -12,7 +12,20 @@
           "package_name": "com.lubbtech"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "440300609647-78bmtths0q96vpo6v5oqd5alcjfsnm4e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lubbtech",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "440300609647-c6gk6s9lj5726076sl8k82ousi3c8vjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDoBDzmwVfe7EvaCYJq0Cl6Frf-jovFDEI"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440300609647-c6gk6s9lj5726076sl8k82ousi3c8vjp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "440300609647-sb6dh7mrg88988imhg11gj8bqraptoi3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lubbtech"
+              }
+            }
+          ]
         }
       }
     }

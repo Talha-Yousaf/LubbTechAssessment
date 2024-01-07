@@ -27,13 +27,16 @@ const styles = StyleSheet.create({
         color:AppColors.white
     },
     textInputContainer:{
-        height:height(25),
         flexDirection:"column",
         justifyContent:"space-between",
     },
     buttonContainerStyle:{
         marginTop:height(6)
     },
+    dropDownContainerStyles:{
+        backgroundColor:AppColors.black,
+    },
+
 });
 
 export default styles
