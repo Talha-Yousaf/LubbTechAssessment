@@ -46,7 +46,6 @@ const ProfileSetup = ({route, navigation}) => {
       dispatch(setLoaderVisible(false))
       dispatch(login({...user}))
     }
-
   };
   return (
     <ScreenWrapper>
