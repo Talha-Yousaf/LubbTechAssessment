@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text,FlatList} from 'react-native';
 import {ScreenWrapper} from 'react-native-screen-wrapper';
-
+import styles from './styles';
 const Home = ({navigation}) => {
   return (
     <ScreenWrapper>
-      <View>
+      <View style={styles.mainContainer}>
         <Text>Home</Text>
       </View>
     </ScreenWrapper>

@@ -45,6 +45,7 @@ const AppColors = {
   grey50: '#BDBDBD',
   grey60: '#828282',
   grey40: '#82828240',
+  gray:"#363636",
   // grey25: '#E4E4E4',
   white: '#FFFFFF',
   white10: 'rgba(255,255,255,0.10)',
@@ -66,6 +67,5 @@ const AppColors = {
   red: '#FF0000',
   green10: '#669e01',
   transparent: 'transparent',
-  gray: 'gray',
 };
 export default AppColors;
