@@ -12,11 +12,14 @@ import LineWithOr from '../../components/LineWithOr';
 import Linker from '../../components/Linker';
 import GoogleLoginButton from '../../components/GoogleLoginButton';
 import {loginMethod,googleSigninMethod} from "../../Firebase/Auth";
+import { login } from '../../Redux/Actions/Auth';
+import AppColors from '../../utills/AppColors';
 const Login = ({navigation}) => {
   const language = useSelector(state => state.Config.language);
   const dispatch = useDispatch()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading,setIsLoading] = useState(false);
 
   const loginFunction = async () => {
     let error = false;
@@ -55,7 +58,8 @@ const Login = ({navigation}) => {
           navigation.navigate("ProfileSetup",{user:res})
         }
         else{
-          
+          dispatch(setLoaderVisible(false))
+          dispatch(login({...res}))
         }
       }
     } catch (e) {
@@ -69,9 +73,14 @@ const Login = ({navigation}) => {
   };
   const handleGoogleSignin = async()=>{
     try{
+      setIsLoading(true);
       const res = await googleSigninMethod();
-      if(res){
+      setIsLoading(false)
+      if(res.newUser){
         navigation.navigate("ProfileSetup",{user:res})
+      }
+      else{
+        dispatch(login({...res}))
       }
     }
     catch(e){
@@ -97,6 +106,7 @@ const Login = ({navigation}) => {
               title={'Email'}
               value={email}
               onChangeText={text => setEmail(text)}
+              editable={!isLoading}
             />
             <TextInput
               placeholder={
@@ -105,27 +115,21 @@ const Login = ({navigation}) => {
               title={'Password'}
               hidden
               value={password}
+              editable={!isLoading}
               onChangeText={text => {
                 setPassword(text);
               }}
+              
             />
           </View>
           <Button
             title={'Login'}
             containerStyle={styles.buttonContainerStyle}
             onPress={loginFunction}
+            disabled={isLoading}
           />
           <LineWithOr />
-          <GoogleLoginButton onPress={handleGoogleSignin}/>
-          {/* <Linker
-            question={
-              language === LANGUAGE.ENGLISH
-                ? "Don't have an account?"
-                : 'Nu ai un cont?'
-            }
-            hint={language === LANGUAGE.ENGLISH ? 'Sign Up' : 'Inregistreaza-te'}
-            onPress={() => navigation.navigate('Signup')}
-          /> */}
+          <GoogleLoginButton onPress={handleGoogleSignin} isLoading={isLoading} loaderColor={AppColors.white}/>
         </View>
       </View>
     </ScreenWrapper>

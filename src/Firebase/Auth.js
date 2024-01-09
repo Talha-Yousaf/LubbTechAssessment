@@ -41,10 +41,61 @@ export const signUpMethod = async (email, password) => {
       return {uid:newUser.id, ...userData};
     }
   } catch (e) {
-    console.log(e);
     throw new Error(e);
   }
 };
+
+export const googleSigninMethod = async () => {
+  try {
+    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+    // Get the users ID token
+    const {idToken} = await GoogleSignin.signIn({prompt: 'select_account',});
+    // Create a Google credential with the token
+    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+    const res = await auth().signInWithCredential(googleCredential);
+    let ifUserExsist = await searchUser(res.user.email);
+    if(ifUserExsist){
+      const user = await firestore()
+      .collection('Users')
+      .where('id', '==', res.user.uid)
+      .get();
+      return {uid:user.docs[0].id,...user.docs[0].data()};
+    }
+    else{
+      const newUser = await createUserInFirestore(res.user.email,res.user.uid);
+      const userData = (await newUser.get()).data();
+      return {uid:newUser.id, ...userData};
+    }
+    // Sign-in the user with the credential
+  } catch (e) {
+    throw new Error(e)
+  }
+};
+
+export const profileSubmit = async(uid,name,age,gender)=>{
+  try{
+    await firestore().collection('Users').doc(uid).update({
+      name,
+      age,
+      gender
+    });
+  }
+  catch(e){
+    throw new Error(e)
+  }
+}
+
+export const setNewUserToOld = async(uid)=>{
+  try{
+    const userRef = await firestore().collection('Users').doc(uid);
+    userRef.update({
+      newUser:false
+    })
+  }
+  catch(e){
+    throw new Error(e)
+  }
+}
 
 const searchUser = async email => {
   try {
@@ -54,8 +105,8 @@ const searchUser = async email => {
       .where('email', '==', email)
       .get();
     return querySnapshot.docs.length !== 0;
-  } catch (error) {
-    console.error('Error searching for user:', error);
+  } catch (e) {
+    throw new Error(e)
   }
 };
 const createUserInFirestore = async(email,uid)=>{
@@ -70,43 +121,4 @@ const createUserInFirestore = async(email,uid)=>{
     catch(e){
         throw new Error(e)
     }
-}
-export const googleSigninMethod = async () => {
-  try {
-    await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
-    // Get the users ID token
-    const {idToken} = await GoogleSignin.signIn();
-    // Create a Google credential with the token
-    const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-    const res = await auth().signInWithCredential(googleCredential);
-    let ifUserExsist = await searchUser(res.user.email);
-    if(ifUserExsist){
-        const user = await firestore()
-        .collection('Users')
-        .where('id', '==', res.user.uid)
-        .get();
-        return user.docs[0].data();
-    }
-    else{
-        const newUser = await createUserInFirestore(res.user.email,res.user.uid);
-        const userData = (await newUser.get()).data();
-        return {uid:newUser.id, ...userData};
-    }
-    // Sign-in the user with the credential
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-export const profileSubmit = async(uid,name,age,gender)=>{
-  try{
-    await firestore().collection('Users').doc(uid).update({
-      name,
-      age,
-      gender
-    });
-  }
-  catch(e){
-    console.log(e);
-  }
 }

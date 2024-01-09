@@ -46,6 +46,7 @@ const AppColors = {
   grey60: '#828282',
   grey40: '#82828240',
   gray:"#363636",
+  gray10:"#AFAFAF",
   // grey25: '#E4E4E4',
   white: '#FFFFFF',
   white10: 'rgba(255,255,255,0.10)',

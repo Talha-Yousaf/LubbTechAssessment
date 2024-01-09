@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {Platform, StyleSheet} from "react-native";
 import { width,height } from "../../utills/Dimensions";
 import AppColors from "../../utills/AppColors";
 import FontFamily from "../../utills/FontFamily";
@@ -16,9 +16,27 @@ const styles = StyleSheet.create({
         color:AppColors.gray,
     },
     image:{
-        width:width(67),
-        height:height(40),
+        width:Platform.OS=="android"?width(73):width(67),
+        height:Platform.OS=="ios"?height(40):height(45),
         alignSelf:"center",
+    },
+    paginationContainer:{
+        width:width(20),
+        marginTop:height(4),
+        alignSelf:"center",
+        flexDirection:"row",
+        justifyContent:"space-between",
+        alignItems:"center",
+    },
+    paginationLine:{
+        width:width(8),
+        borderWidth:0.5,
+        borderColor:AppColors.gray10
+    },
+    paginationLineActive:{
+        width:width(8),
+        borderWidth:1,
+        borderColor:AppColors.white
     },
     headingText:{
         fontSize:width(8),
@@ -38,9 +56,27 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         width:width(87.5),
+        marginTop:Platform.OS=="android"?height(17):height(12),
         flexDirection:"row",
         justifyContent:"space-between",
-        alignItems:"center",  
+        alignItems:"center",
+        alignSelf:"center",
+     },
+    backText:{
+        color:AppColors.gray,
+    },
+    nextContainer:{
+        paddingHorizontal:width(4),
+        paddingVertical:height(1),
+        borderRadius:width(1),
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:AppColors.primary,
+    },
+    nextText:{
+        fontSize:width(4),
+        fontFamily:FontFamily.LatoRegular,
+        color:AppColors.white,
      },
 });
 export default styles;

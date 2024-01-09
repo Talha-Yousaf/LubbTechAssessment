@@ -11,7 +11,7 @@ import Button from '../../components/Button';
 import ModalDropDown from '../../components/ModalDropDown';
 import {genders} from "../../utills/DummyData";
 import { profileSubmit } from '../../Firebase/Auth';
-import { login } from '../../Redux/Actions/Auth';
+
 const ProfileSetup = ({route, navigation}) => {
   const language = useSelector(state => state.Config.language);
   const user = route?.params?.user;
@@ -41,10 +41,20 @@ const ProfileSetup = ({route, navigation}) => {
         type: 'danger',
       });
     } else {
-      dispatch(setLoaderVisible(true));
-      const res = await profileSubmit(user.uid,name,age,gender)
-      dispatch(setLoaderVisible(false))
-      dispatch(login({...user}))
+      try{
+        dispatch(setLoaderVisible(true));
+        const res = await profileSubmit(user.uid,name,age,gender);
+        dispatch(setLoaderVisible(false));
+        navigation.navigate("Onboarding",{user});
+      }
+      catch(e){
+        dispatch(setLoaderVisible(false))
+        showMessage({
+          message: e,
+          description: message,
+          type: 'danger',
+        });
+      }
     }
   };
   return (

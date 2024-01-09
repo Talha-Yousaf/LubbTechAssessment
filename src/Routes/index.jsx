@@ -19,7 +19,7 @@ export default function Routes() {
     <NavigationContainer>
       <Loader/>
       {!isLogin ? (
-        <Stack.Navigator initialRouteName="Onboarding" screenOptions={{headerShown:false}}>
+        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown:false}}>
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="ProfileSetup" component={ProfileSetup} />
           <Stack.Screen name="Onboarding" component={Onboarding} />
