@@ -45,16 +45,7 @@ const Input = ({
           onChangeText = {onChangeText!=null?(text)=>{
             onChangeText(text)
           }:
-          ()=>{}
-          // :(text)=>{
-          //   let regex = /^[a-zA-Z ]*$/
-          //   if(alphabets &&  regex.test(text)){
-          //     setInputText(text)
-          //   }
-          //   else if(!alphabets){
-          //     setInputText(text)
-          //   }
-          // }
+          ()=>{}       
         }
           onFocus={()=>setFocus(true)}
           onEndEditing={()=>setFocus(false)}
